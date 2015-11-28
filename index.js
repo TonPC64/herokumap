@@ -8,9 +8,11 @@ var jsonParser = bodyParser.json()
 
 app.use(express.static('public'))
 
-var http = require('http').Server(app)
-var io = require('socket.io')(http)
+var server = app.listen(app.get('port'), function () {
+  console.log('Node app is running on port', app.get('port'))
+})
 
+var io = require('socket.io').listen(server)
 io.on('connection', function (socket) {
   console.log('a user connected')
   socket.on('disconnect', function () {
@@ -20,8 +22,4 @@ io.on('connection', function (socket) {
     console.log(data)
     io.emit('push', data)
   })
-})
-
-app.listen(app.get('port'), function () {
-  console.log('Node app is running on port', app.get('port'))
 })
