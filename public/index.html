@@ -22,7 +22,7 @@
       <div class="mapWrap"  data-tap-disabled="true">
         <map center="43.07493,-89.381388" zoom="15"> 
           <!-- ngRepeat: pos in positions -->
-          <marker ng-repeat=" pos in positions" position="{{pos.lat}},{{pos.lng}}"></marker>
+          <marker ng-repeat=" pos in positions" position="{{pos.lat}},{{pos.lng}}" title="{{pos.name}}"></marker>
         </map> 
       </div>
     </ion-content>

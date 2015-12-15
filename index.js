@@ -13,6 +13,7 @@ var server = app.listen(app.get('port'), function () {
 })
 
 var io = require('socket.io').listen(server)
+
 io.on('connection', function (socket) {
   console.log('a user connected')
   socket.on('disconnect', function () {
@@ -21,5 +22,10 @@ io.on('connection', function (socket) {
   socket.on('shareLoc', function (data) {
     console.log(data)
     io.emit('push', data)
+  })
+
+  socket.on('user',function (message) {
+  	io.emit('user',message.User)
+  	console.log(message.User)
   })
 })

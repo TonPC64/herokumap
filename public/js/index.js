@@ -8,6 +8,11 @@ angular.module('ionicApp', ['ionic', 'ngMap'])
     })
 
     var socket = io.connect()
+    $scope.nameuser = prompt("ระบุชื่อที่จะแสดงในแผนที่")
+    socket.emit('user',{
+      User : $scope.nameuser
+    })
+
 
     socket.on('push', function (data) {
       console.log(data)
@@ -28,7 +33,7 @@ angular.module('ionicApp', ['ionic', 'ngMap'])
         console.log(pos)
         $scope.map.setCenter(pos)
         $ionicLoading.hide()
-        socket.emit('shareLoc', {lat: position.coords.latitude,lng: position.coords.longitude})
+        socket.emit('shareLoc', {lat: position.coords.latitude,lng: position.coords.longitude,name:$scope.nameuser})
       })
 
     }
